@@ -44,7 +44,7 @@ class PrefixSum:
         else:
             c = t_n[(int(self.word_k / 2))] / (self.word_n + self.word_step * (self.word_k / 2))
             if c == 0:
-                c = 1
+                c = 1/100
             for i in range(0, self.word_k):
                 q_n = round(t_n[i] / (c * (self.word_n + self.word_step * i)), 2)
                 print("|" + str(self.word_n + self.word_step * i) + " " * (
