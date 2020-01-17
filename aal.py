@@ -46,7 +46,11 @@ class PrefixSum:
             if c == 0:
                 c = sys.float_info.epsilon
             for i in range(0, self.word_k):
-                q_n = round(t_n[i] / (c * (self.word_n + self.word_step * i)), 2)
+                try:
+                    q_n = round(t_n[i] / (c * (self.word_n + self.word_step * i)), 2)
+                except ZeroDivisionError:
+                    print("Division by zero")
+                    exit(1)
                 print("|" + str(self.word_n + self.word_step * i) + " " * (
                         7 - len(str(self.word_n + self.word_step * i))) + ""
                                                                           "|" + str(round(t_n[i], 2)) + " " * (
@@ -72,8 +76,16 @@ class PrefixSum:
         if c_N == 0:
             c_N = sys.float_info.epsilon
         for i in range(0, self.word_k):
-            q_n_N2 = round(t_n_N2[i] / (c_N2 * (self.word_n + self.word_step * i) ** 2), 2)
-            q_n_N = round(t_n_N[i] / (c_N * (self.word_n + self.word_step * i)), 2)
+            try:
+                q_n_N2 = round(t_n_N2[i] / (c_N2 * (self.word_n + self.word_step * i) ** 2), 2)
+            except ZeroDivisionError:
+                print("Division by zero")
+                exit(1)
+            try:
+                q_n_N = round(t_n_N[i] / (c_N * (self.word_n + self.word_step * i)), 2)
+            except ZeroDivisionError:
+                print("Division by zero")
+                exit(1)
             print(
                 str(self.word_n + self.word_step * i) + "," + str(round(t_n_N2[i], 2)) + "," + str(q_n_N2) + "," + str(
                     sum_N2[i]) + "," + str(round(t_n_N[i], 2)) + "," + str(q_n_N) + "," + str(sum_N[i]))
